@@ -1,5 +1,41 @@
-// TODO: write the validation functions
+const isValidName = (name) => {
+  if (typeof name === 'string' && name.length > 0) {
+    let counter = 0;
+    for (let i = 0; i < name.length; i += 1) {
+      if (name[i] !== ' ') {
+        counter += 1;
+      }
+    } 
+    return counter > 2 ? true : false;
+  } else {
+    return false;
+  }
+}
 
+const hoursAttended = (attended, length) => {
+  if (
+    attended === true 
+    || length === true 
+    || !attended 
+    || !length
+    ) {
+    return false;
+  }
+  const attendedNum = Number(attended);
+  const lengthNum = Number(length);
+  if (
+    !attendedNum 
+    || !lengthNum 
+    || attendedNum < 1 
+    || lengthNum < 1 
+    || attendedNum % 1 !== 0 
+    || lengthNum % 1 !== 0 
+    || lengthNum < attendedNum
+    ) {
+    return false;
+  }
+  return true;
+}
 
 
 // tests:
