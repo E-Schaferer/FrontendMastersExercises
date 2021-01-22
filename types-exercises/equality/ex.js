@@ -1,6 +1,75 @@
-// TODO: write `findAll(..)`
+const findAll = (target, array) => {
+	const output = [];
+	if (target == Infinity || target == -Infinity) {
+		iterateInf(target, array, output);
+	} else if (target == NaN) {
+		iterateNaN(array, output);
+	} else if (target === "") {
+		iterateEmpty(array, output);
+	} else if (
+		target === 0 
+		|| target === -0 
+		|| target === "0" 
+		|| target === "-0"
+		) {
+			iterateZero(target, array, output);
+	} else {
+		iterateReg(target, array, output);
+	}
+	console.log(output, target);
+	return output;
+}
 
+const iterateInf = (target, input, output) => {
+	for (let i = 0; i < input.length; i += 1) {
+		if (target === Infinity && input[i] === Infinity) {
+			output.push(Infinity);
+		} else if (target === -Infinity && input[i] === -Infinity) {
+			output.push(-Infinity);
+		}
+	}
+	return output;
+}
 
+const iterateNaN = (input, output) => {
+	for (let i = 0; i < input.length; i += 1) {
+		if (input[i] === NaN) {
+			output.push(NaN)
+		}
+	}
+	return output;
+}
+
+const iterateZero = (target, input, output) => {
+	for (let i = 0; i < input.length; i += 1) {
+		if (1 / target == -Infinity && 1 / input[i] == -Infinity) {
+			output.push(-0)
+		} else if (typeof input[i] == 'number' || typeof input[i] == 'string' && input[i] !== "") {
+		  if (1 / target == Infinity && 1 / input[i] == Infinity) {
+			output.push(input[i])
+		  }
+		}
+	}
+	return output;
+}
+
+const iterateEmpty = (input, output) => {
+	for (let i = 0; i < input.length; i += 1) {
+		if (input[i] === "") {
+			output.push("")
+		}
+	}
+	return output;
+}
+
+const iterateReg = (target, input, output) => {
+	for (let i = 0; i < input.length; i += 1) {
+		if (target == input[i]) {
+			output.push(input[i]);
+		}
+	}
+	return output;
+}
 
 // tests:
 var myObj = { a: 2 };
